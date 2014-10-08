@@ -1,0 +1,24 @@
+sullitracker
+
+Simple ncurses program to display bitcoin prices amoung other things
+
+It is a work in progress.
+
+Things I want it to do:
+* Display bitcoin prices update every minute
+* Show gps coordinates of bots
+* Show interesting events from WebSocket node servers.
+* Countdown timer to events
+* Site uptimes, load averages etc 
+
+== Dependencies ==
+* libncurses - Display text graphics
+* cURL - url fetching
+
+== License == 
+MIT
+
+
+== Compiling ==
+$ make
+$ ./sullitracker
