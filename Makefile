@@ -1,11 +1,11 @@
 # Makefile for sulliticker
 CC=gcc
 CFLAGS=-c -W -Wall -ansi -pedantic
-LDFLAGS=-lncurses -lcurl -lm
+LDFLAGS=-lncurses -lcurl -lm -lpthread
 EXECUTABLE=sulliticker
-OBJ=cJSON.o main.o curlhelper.o
+OBJ=cJSON.o main.o curlhelper.o netthread.o
 
-all: sulliticker
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJ)
 	$(CC) $(OBJ) $(LDFLAGS) -o $(EXECUTABLE)
@@ -18,6 +18,10 @@ curlhelper.o: curlhelper.c
 
 cJSON.o: cJSON.c
 	$(CC) -c cJSON.c
+
+netthread.o: netthread.c
+	$(CC) $(CFLAGS) netthread.c
+
 clean:
 	rm -rf *o sullitracker
 

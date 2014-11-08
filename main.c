@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <pthread.h>
 #include "cJSON.h"
 #include "curlhelper.h"
+#include "netthread.h"
 
 void status_bar(){
   mvprintw(LINES - 1, 0, "Staus:");
@@ -17,8 +19,9 @@ int main(void){
   char *url = "https://api.bitcoinaverage.com/ticker/NZD/";
   cJSON *jsonRoot;
   double askPrice;
-  initscr();
-  printw("Hello World is loading !!!\n");	
+  pthread_t netThread;
+
+  initscr();	
   /*status_bar();*/
   refresh();
   
@@ -29,9 +32,12 @@ int main(void){
     printw("Ask price is %.2f\n", askPrice);
 
   }
+  netThread = sul_NetworkStart();
+  
  
   getch();
   endwin();
+  /*pthread_join(netThread, NULL);*/
   sul_freeUrlResponse(responseBuf);
   return EXIT_SUCCESS;
 }
